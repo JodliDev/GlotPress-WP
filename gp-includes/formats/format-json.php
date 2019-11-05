@@ -105,7 +105,7 @@ class GP_Format_JSON extends GP_Format {
 			$value = (array) $value;
 
 			if ( isset( $value[0] ) ) {
-				$args['translations'] = $value[0];
+				$args['translations'] = [$value[0]];
 			}
 
 			if ( isset( $value[1] ) ) {

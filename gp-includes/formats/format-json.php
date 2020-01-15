@@ -91,44 +91,16 @@ class GP_Format_JSON extends GP_Format {
 			if ( '' === $key ) {
 				continue;
 			}
-
-			$args = array(
-				'singular' => $key,
-			);
-
-			if ( false !== strpos( $key, chr( 4 ) ) ) {
-				$key              = explode( chr( 4 ), $key );
-				$args['context']  = $key[0];
-				$args['singular'] = $key[1];
-			}
-
-			$value = (array) $value;
-
-			if ( isset( $value[0] ) ) {
-				$args['translations'] = [$value[0]];
-			}
-
-			if ( isset( $value[1] ) ) {
-				$args['plural'] = $value[1];
-			}
-
-			$entries->add_entry( new Translation_Entry( $args ) );
+			
+			$entry = new Translation_Entry();
+			$entry->context = $key;
+			$entry->singular = $value;
+			$entry->translations = array();
+			
+			$entries->add_entry($entry);
 		}
 
 		return $entries;
-	}
-
-	/**
-	 * Reads a set of translations from a JSON file.
-	 *
-	 * @since 2.3.0
-	 *
-	 * @param string     $file_name The name of the uploaded properties file.
-	 * @param GP_Project $project   Unused. The project object to read the translations into.
-	 * @return Translations|bool The extracted translations on success, false on failure.
-	 */
-	public function read_translations_from_file( $file_name, $project = null ) {
-		return $this->read_originals_from_file( $file_name );
 	}
 
 	/**

@@ -112,6 +112,7 @@ function gp_nav_menu_items( $location = 'main' ) {
 		}
 		else {
 			$items[ esc_url( wp_login_url( gp_url_current() ) ) ] = __( 'Log in', 'glotpress' );
+			$items[ esc_url( wp_register_url( gp_url_current() ) ) ] = __( 'Register', 'glotpress' );
 		}
 	}
 
